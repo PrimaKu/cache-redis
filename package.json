@@ -1,0 +1,29 @@
+{
+  "name": "cache-redis",
+  "version": "0.1.0",
+  "description": "A library for caching with Redis",
+  "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/official-primaku/backend/package/cache-redis.git"
+  },
+  "keywords": [
+    "cache",
+    "redis",
+    "nodejs"
+  ],
+  "author": "haris@primaku.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "test": "ts-node src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "redis": "^4.6.13"
+  }
+}
