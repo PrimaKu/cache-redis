@@ -15,11 +15,7 @@ class Cache {
     constructor(options = {}) {
         this.client = (0, redis_1.createClient)();
         this.client = (0, redis_1.createClient)(options);
-    }
-    init() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
-        });
+        this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
     }
     get(key) {
         return __awaiter(this, void 0, void 0, function* () {

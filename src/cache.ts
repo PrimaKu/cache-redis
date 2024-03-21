@@ -6,10 +6,7 @@ export class Cache {
 
   constructor(options: RedisClientOptions = {}) {
     this.client = createClient(options);
-  }
-
-  async init() {
-    await this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
+    this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
   }
 
   async get(key: string | KEYS): Promise<any | null> {
