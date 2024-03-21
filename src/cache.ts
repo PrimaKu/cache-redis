@@ -1,5 +1,5 @@
 import { RedisClientOptions, createClient } from 'redis';
-import { KEYS } from './constant';
+import { CacheKeys } from './constant';
 
 export class Cache {
   private client = createClient();
@@ -9,7 +9,7 @@ export class Cache {
     this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
   }
 
-  async get(key: string | KEYS): Promise<any | null> {
+  async get(key: string | CacheKeys): Promise<any | null> {
     const value = await this.client.get(key);
     let result = null;
 
@@ -22,7 +22,7 @@ export class Cache {
     return result ?? value;
   }
 
-  async set(key: string | KEYS, value: any, expiry = 1440) {
+  async set(key: string | CacheKeys, value: any, expiry = 1440) {
     let data;
 
     try {
@@ -34,7 +34,7 @@ export class Cache {
     await this.client.set(key, data ?? value, { EX: expiry });
   }
 
-  async del(key: string | KEYS) {
+  async del(key: string | CacheKeys) {
     await this.client.del(key);
   }
 }
