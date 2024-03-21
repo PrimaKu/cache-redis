@@ -1,7 +1,7 @@
 import { RedisClientOptions, createClient } from 'redis';
 import { KEYS } from './constant';
 
-class Cache {
+export class Cache {
   private client = createClient();
 
   constructor(options: RedisClientOptions = {}) {
@@ -41,5 +41,3 @@ class Cache {
     await this.client.del(key);
   }
 }
-
-export default Cache;

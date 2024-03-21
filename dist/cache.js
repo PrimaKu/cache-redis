@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Cache = void 0;
 const redis_1 = require("redis");
 class Cache {
     constructor(options = {}) {
@@ -51,4 +52,4 @@ class Cache {
         });
     }
 }
-exports.default = Cache;
+exports.Cache = Cache;
