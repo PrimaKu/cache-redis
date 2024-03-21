@@ -1,10 +1,13 @@
-import Cache from '../dist';
+import { Cache, CacheKeys } from '../dist';
+import client from 'prom-client';
 
 const cache = new Cache();
-await cache.init();
 
-await cache.set('one', { key: 'value' });
+await cache.set(CacheKeys.BANNER_LIST, { key: 'value' });
 
-const data = await cache.get('one');
+await cache.get(CacheKeys.RECOMMENDED_ARTICLE_LIST);
+const data = await cache.get(CacheKeys.BANNER_LIST);
 
 console.log({ data });
+
+console.log(await client.register.metrics());

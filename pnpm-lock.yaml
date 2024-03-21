@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  prom-client:
+    specifier: ^15.1.0
+    version: 15.1.0
   redis:
     specifier: ^4.6.13
     version: 4.6.13
@@ -44,6 +47,11 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /@opentelemetry/api@1.8.0:
+    resolution: {integrity: sha512-I/s6F7yKUDdtMsoBWXJe8Qz40Tui5vsuKCWJEWVL+5q9sSWRzzx6v2KeNsOBEwd94j0eWkpWCH4yB6rZg9Mf0w==}
+    engines: {node: '>=8.0.0'}
+    dev: false
 
   /@redis/bloom@1.2.0(@redis/client@1.5.14):
     resolution: {integrity: sha512-HG2DFjYKbpNmVXsa0keLHp/3leGJz1mjh09f2RLGGLQZzSHpkmZWuwJbAvo3QcRY8p80m5+ZdXZdYOSBLlp7Cg==}
@@ -131,6 +139,10 @@ packages:
     resolution: {integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==}
     dev: true
 
+  /bintrees@1.0.2:
+    resolution: {integrity: sha512-VOMgTMwjAaUG580SXn3LacVgjurrbMme7ZZNYGSSV7mmtY6QQRh0Eg3pwIcntQ77DErK1L0NxkbetjcoXzVwKw==}
+    dev: false
+
   /cluster-key-slot@1.1.2:
     resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
     engines: {node: '>=0.10.0'}
@@ -154,6 +166,14 @@ packages:
     resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
     dev: true
 
+  /prom-client@15.1.0:
+    resolution: {integrity: sha512-cCD7jLTqyPdjEPBo/Xk4Iu8jxjuZgZJ3e/oET3L+ZwOuap/7Cw3dH/TJSsZKs1TQLZ2IHpIlRAKw82ef06kmMw==}
+    engines: {node: ^16 || ^18 || >=20}
+    dependencies:
+      '@opentelemetry/api': 1.8.0
+      tdigest: 0.1.2
+    dev: false
+
   /redis@4.6.13:
     resolution: {integrity: sha512-MHgkS4B+sPjCXpf+HfdetBwbRz6vCtsceTmw1pHNYJAsYxrfpOP6dz+piJWGos8wqG7qb3vj/Rrc5qOlmInUuA==}
     dependencies:
@@ -163,6 +183,12 @@ packages:
       '@redis/json': 1.0.6(@redis/client@1.5.14)
       '@redis/search': 1.1.6(@redis/client@1.5.14)
       '@redis/time-series': 1.0.5(@redis/client@1.5.14)
+    dev: false
+
+  /tdigest@0.1.2:
+    resolution: {integrity: sha512-+G0LLgjjo9BZX2MfdvPfH+MKLCrxlXSYec5DaPYP1fe6Iyhf0/fSmJ0bFiZ1F8BT6cGXl2LpltQptzjXKWEkKA==}
+    dependencies:
+      bintrees: 1.0.2
     dev: false
 
   /ts-node@10.9.2(@types/node@20.11.30)(typescript@5.4.2):

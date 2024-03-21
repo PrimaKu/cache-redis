@@ -1,5 +1,6 @@
 import { RedisClientOptions, createClient } from 'redis';
 import { CacheKeys } from './constant';
+import { cachedHistogram, hitHistogram, missedHistogram } from './metrics';
 
 export class Cache {
   private client = createClient();
@@ -12,6 +13,14 @@ export class Cache {
   async get(key: string | CacheKeys): Promise<any | null> {
     const value = await this.client.get(key);
     let result = null;
+
+    hitHistogram.observe({ key }, 1);
+
+    if (value) {
+      cachedHistogram.observe({ key }, 1);
+    } else {
+      missedHistogram.observe({ key }, 1);
+    }
 
     try {
       result = value ? JSON.parse(value) : null;

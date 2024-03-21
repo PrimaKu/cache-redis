@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Cache = void 0;
 const redis_1 = require("redis");
+const metrics_1 = require("./metrics");
 class Cache {
     constructor(options = {}) {
         this.client = (0, redis_1.createClient)();
@@ -21,6 +22,13 @@ class Cache {
         return __awaiter(this, void 0, void 0, function* () {
             const value = yield this.client.get(key);
             let result = null;
+            metrics_1.hitHistogram.observe({ key }, 1);
+            if (value) {
+                metrics_1.cachedHistogram.observe({ key }, 1);
+            }
+            else {
+                metrics_1.missedHistogram.observe({ key }, 1);
+            }
             try {
                 result = value ? JSON.parse(value) : null;
             }
