@@ -17,9 +17,7 @@ class Cache {
     }
     init() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.client
-                .on("error", (err) => console.error("Redis Client Error", err))
-                .connect();
+            yield this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
         });
     }
     get(key) {
@@ -32,19 +30,19 @@ class Cache {
             catch (error) {
                 console.error(error);
             }
-            return result;
+            return result !== null && result !== void 0 ? result : value;
         });
     }
     set(key_1, value_1) {
         return __awaiter(this, arguments, void 0, function* (key, value, expiry = 1440) {
-            let data = "";
+            let data;
             try {
                 data = JSON.stringify(value);
             }
             catch (error) {
                 console.error(error);
             }
-            yield this.client.set(key, data, { EX: expiry });
+            yield this.client.set(key, data !== null && data !== void 0 ? data : value, { EX: expiry });
         });
     }
     del(key) {
