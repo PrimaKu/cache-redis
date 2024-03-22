@@ -6,7 +6,10 @@ export class Cache {
   private client = createClient();
 
   constructor(options: RedisClientOptions = {}) {
-    this.client = createClient(options);
+    this.client = createClient({
+      database: 9,
+      ...options
+    });
     this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
   }
 

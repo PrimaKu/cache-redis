@@ -15,7 +15,7 @@ const metrics_1 = require("./metrics");
 class Cache {
     constructor(options = {}) {
         this.client = (0, redis_1.createClient)();
-        this.client = (0, redis_1.createClient)(options);
+        this.client = (0, redis_1.createClient)(Object.assign({ database: 9 }, options));
         this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
     }
     get(key) {
