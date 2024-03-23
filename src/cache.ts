@@ -1,6 +1,6 @@
 import { RedisClientOptions, createClient } from 'redis';
 import { CacheKeys } from './constant';
-import { cachedHistogram, hitHistogram, missedHistogram } from './metrics';
+import { hitCounter, missedCounter } from './metrics';
 
 export class Cache {
   private client = createClient();
@@ -8,7 +8,7 @@ export class Cache {
   constructor(options: RedisClientOptions = {}) {
     this.client = createClient({
       database: 9,
-      ...options
+      ...options,
     });
     this.client.on('error', (err) => console.error('Redis Client Error', err)).connect();
   }
@@ -17,12 +17,10 @@ export class Cache {
     const value = await this.client.get(key);
     let result = null;
 
-    hitHistogram.observe({ key }, 1);
+    hitCounter.inc();
 
-    if (value) {
-      cachedHistogram.observe({ key }, 1);
-    } else {
-      missedHistogram.observe({ key }, 1);
+    if (!value) {
+      missedCounter.inc();
     }
 
     try {

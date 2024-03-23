@@ -22,12 +22,9 @@ class Cache {
         return __awaiter(this, void 0, void 0, function* () {
             const value = yield this.client.get(key);
             let result = null;
-            metrics_1.hitHistogram.observe({ key }, 1);
-            if (value) {
-                metrics_1.cachedHistogram.observe({ key }, 1);
-            }
-            else {
-                metrics_1.missedHistogram.observe({ key }, 1);
+            metrics_1.hitCounter.inc();
+            if (!value) {
+                metrics_1.missedCounter.inc();
             }
             try {
                 result = value ? JSON.parse(value) : null;
