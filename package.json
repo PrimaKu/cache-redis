@@ -1,6 +1,6 @@
 {
   "name": "cache-redis-node",
-  "version": "0.1.0",
+  "version": "0.1.0-test",
   "description": "A library for caching with Redis",
   "main": "./dist/index.js",
   "keywords": [
